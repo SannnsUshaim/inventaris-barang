@@ -23,7 +23,7 @@
                 @include('partials.user-view-sidebar')
             @endif
             <!-- Page Content -->
-            <main class="flex flex-col basis-[85%] overflow-x-hidden overflow-y-auto">
+            <main class="flex flex-col basis-[82%] min-h-screen overflow-x-hidden overflow-y-auto">
                 <!-- Page Heading -->
                 @if (isset($header))
                     <header class="bg-white dark:bg-gray-800 shadow">
@@ -55,7 +55,7 @@
 
                                             <x-dropdown-link :href="route('logout')"
                                                     onclick="event.preventDefault();
-                                                                this.closest('form').submit();">
+                                                                this.closest('form').submit();" class="hover:bg-red-500 hover:text-white">
                                                 {{ __('Log Out') }}
                                             </x-dropdown-link>
                                         </form>
@@ -74,9 +74,19 @@
                             </div>
                         </div>
                     </header>
-                @endif
-                {{ $slot }}
+                    @endif
+                    <div class="p-6 flex flex-col gap-5 h-full">
+                        {{ $slot }}
+                        @include('partials.footer')
+                    </div>
             </main>
-        </ma>
+            <script src="https://cdn.jsdelivr.net/npm/dayjs@1/dayjs.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.min.js"></script>
+            <script>
+                const now = dayjs().format("dddd, DD MMM YYYY");
+
+                const displayDate = document.getElementById('date-time').innerText = now;
+            </script>
+        </main>
     </body>
 </html>

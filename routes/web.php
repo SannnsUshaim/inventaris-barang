@@ -3,7 +3,8 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\BarangController;
-use App\Http\Controllers\PembelianController;    
+use App\Http\Controllers\PembelianController;
+use App\Http\Controllers\PemakaianController;    
 use Illuminate\Support\Facades\Route;
 
 
@@ -32,13 +33,29 @@ Route::middleware('auth')->group(function () {
 
 Route::middleware(['auth', 'verified', 'role:admin'])->group(function () {
     Route::get('barang', [BarangController::class, 'index'])->name('barang.index');
-    Route::get('barang/{id}', [BarangController::class, 'edit'])->name('barang.edit');
-    Route::patch('barang/{id}/update', [BarangController::class, 'update'])->name('barang.update');
-    Route::delete('barang/{id}/delete', [BarangController::class, 'delete'])->name('barang.delete');
+    Route::get('barang/create', [BarangController::class, 'create'])->name('barang.create');
+    Route::post('barang/store', [BarangController::class, 'store'])->name('barang.store');
+    Route::get('barang/{id_barang}/edit', [BarangController::class, 'edit'])->name('barang.edit');
+    Route::patch('barang/{id_barang}/update', [BarangController::class, 'update'])->name('barang.update');
+    Route::delete('barang/{id}/delete', [BarangController::class, 'destroy'])->name('barang.destroy');
 });
 
 Route::middleware(['auth', 'verified', 'role:admin'])->group(function () {
     Route::get('pembelian', [PembelianController::class, 'index'])->name('pembelian.index');
+    Route::get('pembelian/create', [PembelianController::class, 'create'])->name('pembelian.create');
+    Route::post('barang/store', [PembelianController::class, 'store'])->name('pembelian.store');
+    Route::get('pembelian/{id_pembelian}/edit', [PembelianController::class, 'edit'])->name('pembelian.edit');
+    Route::patch('pembelian/{id_pembelian}/update', [PembelianController::class, 'update'])->name('pembelian.update');
+    Route::delete('pembelian/{id}/delete', [PembelianController::class, 'destroy'])->name('pembelian.destroy');
+});
+
+Route::middleware(['auth', 'verified', 'role:admin'])->group(function () {
+    Route::get('pemakaian', [PemakaianController::class, 'index'])->name('pemakaian.index');
+    Route::get('pemakaian/create', [PemakaianController::class, 'create'])->name('pemakaian.create');
+    Route::post('pemakaian/store', [PemakaianController::class, 'store'])->name('pemakaian.store');
+    Route::get('pemakaian/{id_pemakaian}/edit', [PemakaianController::class, 'edit'])->name('pemakaian.edit');
+    Route::patch('pemakaian/{id_pemakaian}/update', [PemakaianController::class, 'update'])->name('pemakaian.update');
+    Route::delete('pemakaian/{id}/delete', [PemakaianController::class, 'destroy'])->name('pemakaian.destroy');
 });
 
 // Grouping routes with common middleware 'auth' and 'verified'

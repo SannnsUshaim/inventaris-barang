@@ -11,11 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('pembelians', function (Blueprint $table) {
+        Schema::create('pemakaians', function (Blueprint $table) {
             $table->id();
-            $table->string('id_pembelian')->unique();
-            $table->foreign('id_barang')->references('id_barang')->on('barangs');
-            $table->integer('jumlah');
             $table->timestamps();
         });
     }
@@ -25,6 +22,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('pembelians');
+        Schema::dropIfExists('pemakaians');
     }
 };
