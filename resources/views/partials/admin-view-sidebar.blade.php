@@ -1,4 +1,4 @@
-<div class="flex flex-col basis-[18%] h-screen overflow-hidden bg-slate-800 p-5 justify-between">
+<div class="flex flex-col basis-[18%] h-screen overflow-hidden bg-gray-800 p-5 justify-between">
     <div class="flex flex-col gap-16">
         <div class="flex justify-center">
             <img src="{{ asset('assets/img/logo-transparent.png') }}" alt="logo INVY" class="w-[180px]">
