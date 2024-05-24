@@ -13,9 +13,6 @@ return new class extends Migration
     {
         Schema::create('pembelians', function (Blueprint $table) {
             $table->id();
-            $table->string('id_pembelian')->unique();
-            $table->foreign('id_barang')->references('id_barang')->on('barangs');
-            $table->integer('jumlah');
             $table->timestamps();
         });
     }
