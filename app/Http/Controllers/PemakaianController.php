@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 class PemakaianController extends Controller
 {
     public function index() {
-        // $pemakaian = Pemakaian::latest()->paginate(10);
-        return view("pemakaian.index");
+        $pemakaian = Pemakaian::latest()->paginate(10);
+        return view("pemakaian.index", compact("pemakaian"));
     }
 }
