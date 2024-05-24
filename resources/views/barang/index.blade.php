@@ -6,7 +6,7 @@
         </h2>
     </x-slot>
 
-        <div class="bg-white flex flex-col w-full h-full relative rounded-md shadow-md p-6 justify-between">
+        <div class="bg-white dark:bg-gray-800 flex flex-col w-full h-full relative rounded-md shadow-md p-6 justify-between">
             <div class="flex flex-col gap-3">
                 <div class="flex">
                     <a href="{{ route('barang.create') }}" class="bg-teal-500 px-4 py-1 text-white font-medium text-sm rounded-md flex items-center gap-2">Tambah Data Barang 
@@ -21,29 +21,29 @@
                     </div>
                 @endif
                 <div></div>
-                <table class="text-sm font-medium">
-                    <thead class="bg-slate-800 rounded-t-md">
+                <table class="text-sm font-medium rounded-t-md">
+                    <thead class="bg-slate-800 dark:bg-white">
                         <tr class="rounded-t-md">
-                            <th class="font-medium py-1 text-white text-left px-2">No.</th>
-                            <th class="font-medium py-1 text-white text-left px-2">Kode Barang</th>
-                            <th class="font-medium py-1 text-white text-left px-2">Nama Barang</th>
-                            <th class="font-medium py-1 text-white text-left px-2">Jenis Barang</th>
-                            <th class="font-medium py-1 text-white text-left px-2">Merek</th>
-                            <th class="font-medium py-1 text-white text-left px-2">Jumlah</th>
-                            <th class="font-medium py-1 text-white text-left px-2">Harga</th>
-                            <th class="font-medium py-1 text-white text-left px-2">Action</th>
+                            <th class="font-medium py-1 text-white dark:text-gray-900 text-left px-2">No.</th>
+                            <th class="font-medium py-1 text-white dark:text-gray-900 text-left px-2">Kode Barang</th>
+                            <th class="font-medium py-1 text-white dark:text-gray-900 text-left px-2">Nama Barang</th>
+                            <th class="font-medium py-1 text-white dark:text-gray-900 text-left px-2">Jenis Barang</th>
+                            <th class="font-medium py-1 text-white dark:text-gray-900 text-left px-2">Merek</th>
+                            <th class="font-medium py-1 text-white dark:text-gray-900 text-left px-2">Jumlah</th>
+                            <th class="font-medium py-1 text-white dark:text-gray-900 text-left px-2">Harga</th>
+                            <th class="font-medium py-1 text-white dark:text-gray-900 text-left px-2">Action</th>
                         </tr>
                     </thead>
                     <tbody>
                         @forelse ($barang as $data)
                             <tr class="border-b-2">
-                                <td class="font-regular p-2">{{ $loop->iteration }}</td>
-                                <td class="font-regular p-2">{{ $data->id_barang }}</td>
-                                <td class="font-regular p-2">{{ $data->nama_barang }}</td>
-                                <td class="font-regular p-2">{{ $data->jenis_barang }}</td>
-                                <td class="font-regular p-2">{{ $data->merek }}</td>
-                                <td class="font-regular p-2">{{ $data->jumlah }}</td>
-                                <td class="font-regular p-2">Rp{{ $data->harga }}</td>
+                                <td class="font-regular dark:text-white p-2">{{ $loop->iteration }}</td>
+                                <td class="font-regular dark:text-white p-2">{{ $data->id_barang }}</td>
+                                <td class="font-regular dark:text-white p-2">{{ $data->nama_barang }}</td>
+                                <td class="font-regular dark:text-white p-2">{{ $data->jenis_barang }}</td>
+                                <td class="font-regular dark:text-white p-2">{{ $data->merek }}</td>
+                                <td class="font-regular dark:text-white p-2">{{ $data->jumlah }}</td>
+                                <td class="font-regular dark:text-white p-2">Rp.{{ $data->harga }}</td>
                                 <td>
                                     <form onsubmit="return confirm('Apakah Anda Yakin?');" action="{{ route('barang.destroy', $data->id) }}" class="flex items-center gap-2" method="post">
                                         <a href="{{ route('barang.edit', $data->id) }}">
@@ -69,7 +69,7 @@
                     </tbody>
                 </table>
             </div>
-            <div class="text-sm">
+            <div class="text-sm dark:text-white">
                 <p>total data: {{ $barang->count() }}</p>
             </div>
         </div>
