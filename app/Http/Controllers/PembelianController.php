@@ -99,7 +99,7 @@ class PembelianController extends Controller
 
         $hapus = $data->delete();
         if($hapus){
-        return redirect()->route('pembelian.index')->with('success-delete','Data barang berhasil dihapus');
+        return redirect()->route('pembelian.index')->with('success-delete','Data barang berhasil dihapus!');
         }
         // $data_delete = $data->delete();
     }

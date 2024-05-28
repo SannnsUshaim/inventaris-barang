@@ -22,7 +22,7 @@ class Controller extends BaseController
             $username = auth()->user()->name;
             $barang_latest = Barang::latest()->paginate(1);
             $pembelian_latest = Pembelian::join("barangs","pembelians.id_barang","=","barangs.id_barang")->select("barangs.nama_barang","pembelians.jumlah","pembelians.created_at")->latest()->paginate(1);
-            $pemakaian_latest = Pemakaian::latest()->paginate(1);
+            $pemakaian_latest = Pemakaian::join("barangs","pemakaians.id_barang","=","barangs.id_barang")->join("users","pemakaians.pemakai","=","users.id_user")->select("barangs.nama_barang","pemakaians.jumlah","pemakaians.tanggal","pemakaians.created_at","users.name")->latest()->paginate(1);
             $barang = Barang::all();
             $pembelian = Pembelian::all();
             $pemakaian = Pemakaian::all();
@@ -31,7 +31,15 @@ class Controller extends BaseController
             return view('layouts.admin.index', compact('username', 'barang', 'pembelian', 'pemakaian', 'barang_latest', 'pembelian_latest', 'pemakaian_latest', 'user', 'user_latest'));
         }
         else {
-            return view('layouts.user.index');
+            $username = auth()->user()->name;
+            $pembelian_latest =
+            Pembelian::join("barangs","pembelians.id_barang","=","barangs.id_barang")->select("barangs.nama_barang","pembelians.jumlah","pembelians.created_at")->latest()->paginate(1);
+            $pemakaian_latest =
+            Pemakaian::join("barangs","pemakaians.id_barang","=","barangs.id_barang")->join("users","pemakaians.pemakai","=","users.id_user")->select("barangs.nama_barang","pemakaians.jumlah","pemakaians.tanggal","pemakaians.created_at","users.name")->latest()->paginate(1);
+            $pembelian = Pembelian::all();
+            $pemakaian = Pemakaian::all();
+            $user = User::all();
+            return view('layouts.user.index', compact('username', 'pembelian', 'pemakaian', 'pembelian_latest', 'pemakaian_latest', 'user'));
         }
     }
 }

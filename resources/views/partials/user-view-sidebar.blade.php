@@ -60,8 +60,9 @@
     <div class="flex gap-3">
         <img src="{{ asset('assets/img/profile.png') }}" alt="profile" class="w-[50px]">
         <div class="flex flex-col text-sm text-slate-300 opacity-70 justify-center">
-            <p>admin</p>
-            <p>admin@mail.com</p>
+
+            <p>{{ Auth::user()->name }}</p>
+            <p>{{ Auth::user()->email }}</p>
         </div>
     </div>
 </div>

@@ -34,7 +34,7 @@
                 <div class="flex flex-col gap-1">
                     <p class="text-lg font-semibold">Latest pemakaian</p>
                     @forelse($pemakaian_latest as $item)
-                        <p class="text-sm flex items-end gap-3"><span class="flex items-end gap-2">{{ $item->nama_barang }} <span class="text-xs text-gray-500">( {{ $item->jumlah }} )</span></span> <span class="text-xs text-gray-500">{{ $item->updated_at }}</span></p>
+                        <p class="text-sm flex items-end gap-3"><span class="flex items-end gap-2">{{ $item->nama_barang }} <span class="text-xs text-gray-500">( {{ $item->jumlah }} )</span></span> <span class="text-xs text-gray-500">{{ $item->tanggal }}</span></p>
                     @empty
                         <p class="text-sm">No data</p>
                     @endforelse

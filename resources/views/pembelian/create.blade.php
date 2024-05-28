@@ -1,7 +1,7 @@
 <x-app-layout>
     @section('title', '- Tambah Data Pembelian')
 
-    <x-slot name="header" class="flex">
+    <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight flex items-center gap-2">
             <a href="{{ route('pembelian.index') }}">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
@@ -11,7 +11,6 @@
             {{ __('Tambah Data Pembelian') }}
         </h2>
     </x-slot>
-
 
     <div class="bg-white dark:bg-gray-800 flex flex-col w-full h-full rounded-md shadow-md p-6 gap-3">
         <form action="{{ route('pembelian.store') }}" enctype="multipart/form-data" class="max-w-md flex flex-col justify-between h-full" method="POST">
@@ -29,36 +28,36 @@
                     </select>
                 </div>
                 <div class="flex flex-col gap-2 dark:text-white">
-                    <label class="text-sm" for="id_barang">Nama Barang</label>
+                    <label class="text-sm" for="nama_barang">Nama Barang</label>
                     <input type="text" class="px-2 py-1 !text-black text-base font-medium rounded-lg border-[1.7px] border-gray-300 shadow-sm focus:outline-none" name="nama_barang" id="nama_barang" required>
                     @error('nama_barang')
                         <p class="text-red-500 text-sm">{{ $message }}</p>
                     @enderror
                 </div>
                 <div class="flex flex-col gap-2 dark:text-white">
-                    <label class="text-sm" for="id_barang">Jenis Barang</label>
+                    <label class="text-sm" for="jenis_barang">Jenis Barang</label>
                     <input type="text" class="px-2 py-1 !text-black text-base font-medium rounded-lg border-[1.7px] border-gray-300 shadow-sm focus:outline-none" name="jenis_barang" id="jenis_barang" required>
                     @error('jenis_barang')
                         <p class="text-red-500 text-sm">{{ $message }}</p>
                     @enderror
                 </div>
                 <div class="flex flex-col gap-2 dark:text-white">
-                    <label class="text-sm" for="id_barang">Merek</label>
+                    <label class="text-sm" for="merek">Merek</label>
                     <input type="text" class="px-2 py-1 !text-black text-base font-medium rounded-lg border-[1.7px] border-gray-300 shadow-sm focus:outline-none" name="merek" id="merek" required>
                     @error('merek')
                         <p class="text-red-500 text-sm">{{ $message }}</p>
                     @enderror
                 </div>
                 <div class="flex flex-col gap-2 dark:text-white">
-                    <label class="text-sm" for="id_barang">harga</label>
-                    <input type="number" class="px-2 py-1 !text-black text-base font-medium rounded-lg border-[1.7px] border-gray-300 shadow-sm focus:outline-none" name="harga" id="harga" required>
+                    <label class="text-sm" for="harga">Harga</label>
+                    <input type="number" class="px-2 py-1 !text-black text-base font-medium rounded-lg border-[1.7px] border-gray-300 shadow-sm focus:outline-none" name="harga" id="harga" oninput="formatHarga(this)" required>
                     @error('harga')
                         <p class="text-red-500 text-sm">{{ $message }}</p>
                     @enderror
                 </div>
                 <div class="flex flex-col gap-2 dark:text-white">
-                    <label class="text-sm" for="id_barang">Jumlah</label>
-                    <input type="number" class="px-2 py-1 !text-black text-base font-medium rounded-lg border-[1.7px] border-gray-300 shadow-sm focus:outline-none" name="jumlah" required>
+                    <label class="text-sm" for="jumlah">Jumlah</label>
+                    <input type="text" class="px-2 py-1 !text-black text-base font-medium rounded-lg border-[1.7px] border-gray-300 shadow-sm focus:outline-none" name="jumlah" id="jumlah" required>
                     @error('jumlah')
                         <p class="text-red-500 text-sm">{{ $message }}</p>
                     @enderror
@@ -82,15 +81,11 @@
                     document.getElementById('nama_barang').value = selectedBarang.nama_barang;
                     document.getElementById('jenis_barang').value = selectedBarang.jenis_barang;
                     document.getElementById('merek').value = selectedBarang.merek;
-                    // If jumlah and harga are pre-filled, uncomment the lines below
-                    // document.getElementById('jumlah').value = selectedBarang.jumlah;
                     document.getElementById('harga').value = selectedBarang.harga;
                 } else {
                     document.getElementById('nama_barang').value = '';
                     document.getElementById('jenis_barang').value = '';
                     document.getElementById('merek').value = '';
-                    // If jumlah and harga are pre-filled, uncomment the lines below
-                    // document.getElementById('jumlah').value = '';
                     document.getElementById('harga').value = '';
                 }
             });

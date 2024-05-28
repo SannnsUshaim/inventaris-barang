@@ -13,6 +13,12 @@ return new class extends Migration
     {
         Schema::create('pemakaians', function (Blueprint $table) {
             $table->id();
+            $table->string('id_barang');
+            $table->foreign('id_barang')->references('id_barang')->on('barangs')->onDelete('cascade');
+            $table->string('pemakai');
+            $table->foreign('pemakai')->references('id_user')->on('users');
+            $table->date('tanggal');
+            $table->integer('jumlah');
             $table->timestamps();
         });
     }
