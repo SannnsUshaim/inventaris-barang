@@ -20,7 +20,6 @@
                         {{ session('success') }}
                     </div>
                 @endif
-                <div></div>
                 <table class="text-sm font-medium rounded-t-md">
                     <thead class="bg-slate-800 dark:bg-white">
                         <tr class="rounded-t-md">
@@ -62,7 +61,7 @@
                                 </td>
                             </tr>
                         @empty
-                            <div class="bg-red-200 px-2 py-1 font-medium">
+                            <div class="bg-red-200 px-2 py-1 font-medium rounded-md">
                                 <p>Data belum tersedia...</p>
                             </div>
                         @endforelse
