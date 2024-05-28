@@ -4,7 +4,8 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\BarangController;
 use App\Http\Controllers\PembelianController;
-use App\Http\Controllers\PemakaianController;    
+use App\Http\Controllers\PemakaianController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -37,25 +38,34 @@ Route::middleware(['auth', 'verified', 'role:admin'])->group(function () {
     Route::post('barang/store', [BarangController::class, 'store'])->name('barang.store');
     Route::get('barang/{id}/edit', [BarangController::class, 'edit'])->name('barang.edit');
     Route::put('barang/{id}/update', [BarangController::class, 'update'])->name('barang.update');
-    Route::delete('barang/delete', [BarangController::class, 'destroy'])->name('barang.destroy');
+    Route::delete('barang/{id}/delete', [BarangController::class, 'destroy'])->name('barang.destroy');
 });
 
-Route::middleware(['auth', 'verified', 'role:admin'])->group(function () {
+Route::middleware(['auth', 'verified', 'role:admin|operator|staff'])->group(function () {
     Route::get('pembelian', [PembelianController::class, 'index'])->name('pembelian.index');
     Route::get('pembelian/create', [PembelianController::class, 'create'])->name('pembelian.create');
     Route::post('pembelian/store', [PembelianController::class, 'store'])->name('pembelian.store');
     Route::get('pembelian/{id}/edit', [PembelianController::class, 'edit'])->name('pembelian.edit');
     Route::put('pembelian/{id}/update', [PembelianController::class, 'update'])->name('pembelian.update');
-    Route::delete('pembelian/delete', [PembelianController::class, 'destroy'])->name('pembelian.destroy');
+    Route::delete('pembelian/{id}/delete', [PembelianController::class, 'destroy'])->name('pembelian.destroy');
 });
 
-Route::middleware(['auth', 'verified', 'role:admin'])->group(function () {
+Route::middleware(['auth', 'verified', 'role:admin|operator'])->group(function () {
     Route::get('pemakaian', [PemakaianController::class, 'index'])->name('pemakaian.index');
     Route::get('pemakaian/create', [PemakaianController::class, 'create'])->name('pemakaian.create');
     Route::post('pemakaian/store', [PemakaianController::class, 'store'])->name('pemakaian.store');
     Route::get('pemakaian/{id}/edit', [PemakaianController::class, 'edit'])->name('pemakaian.edit');
     Route::put('pemakaian/{id}/update', [PemakaianController::class, 'update'])->name('pemakaian.update');
-    Route::delete('pemakaian/delete', [PemakaianController::class, 'destroy'])->name('pemakaian.destroy');
+    Route::delete('pemakaian/{id}/delete', [PemakaianController::class, 'destroy'])->name('pemakaian.destroy');
+});
+
+Route::middleware(['auth', 'verified', 'role:admin'])->group(function () {
+    Route::get('user', [UserController::class, 'index'])->name('user.index');
+    Route::get('user/create', [UserController::class, 'create'])->name('user.create');
+    Route::post('user/store', [UserController::class, 'store'])->name('user.store');
+    Route::get('user/{id}/edit', [UserController::class, 'edit'])->name('user.edit');
+    Route::put('user/{id}/update', [UserController::class, 'update'])->name('user.update');
+    Route::delete('user/{id}/delete', [UserController::class, 'destroy'])->name('user.destroy');
 });
 
 require __DIR__.'/auth.php';
