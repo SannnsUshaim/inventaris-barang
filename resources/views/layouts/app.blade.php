@@ -11,6 +11,7 @@
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
         <link rel="icon" type="image/x-icon" href="{{ asset('assets/img/logo.png') }}">
+        <link rel="stylesheet" href="https://cdn.datatables.net/2.0.7/css/dataTables.dataTables.css" />
 
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
@@ -23,7 +24,7 @@
                 @include('partials.user-view-sidebar')
             @endif
             <!-- Page Content -->
-            <main class="flex flex-col basis-[82%] min-h-screen overflow-x-hidden overflow-y-auto">
+            <main class="flex flex-col basis-[82%] bg-gray-100 dark:bg-gray-800 min-h-screen overflow-x-hidden overflow-y-auto">
                 <!-- Page Heading -->
                 @if (isset($header))
                     <header class="bg-white dark:bg-gray-800 shadow">
@@ -34,7 +35,16 @@
                                 <x-dropdown align="right" width="48">
                                     <x-slot name="trigger">
                                         <button class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 dark:text-gray-400 bg-white dark:bg-gray-800 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none transition ease-in-out duration-150">
-                                            <div>{{ Auth::user()->name }}</div>
+                                            @php
+                                                $userRoles = Auth::user()->getRoleNames();
+                                            @endphp
+                                            <div class="flex items-center gap-1">
+                                                <p>{{ Auth::user()->name }}</p>
+                                                <span class="text-xs text-gray-500">|</span>
+                                                @foreach($userRoles as $role)
+                                                    ({{ $role }})
+                                                @endforeach
+                                            </div>
 
                                             <div class="ms-1">
                                                 <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
@@ -75,15 +85,24 @@
                         </div>
                     </header>
                     @endif
-                    <div class="p-6 flex flex-col gap-5 h-full">
+                    <div class="p-6 flex flex-col gap-5 h-full relative bg-gray-100 dark:bg-gray-900 rounded-tl-xl">
                         {{ $slot }}
                         @include('partials.footer')
                     </div>
             </main>
             <script src="https://cdn.jsdelivr.net/npm/dayjs@1/dayjs.min.js"></script>
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.min.js"></script>
             <script>
                 const now = dayjs().format("dddd, DD MMM YYYY");
+                const hour = dayjs().format("HH");
+                let greet = document.getElementById('greet');
+
+                if (hour < 12) {
+                    greet.innerText = 'Selamat pagi';
+                } else if (hour < 18) {
+                    greet.innerText = 'Selamat siang';
+                } else {
+                    greet.innerText = 'Selamat malam';
+                }
 
                 const displayDate = document.getElementById('date-time').innerText = now;
             </script>
