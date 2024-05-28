@@ -33,13 +33,47 @@
                     <label class="text-sm" for="id_barang">Merek</label>
                     <input type="text" class="px-2 py-1 !text-black text-base font-medium rounded-lg border-[1.7px] border-gray-300 shadow-sm focus:outline-none" name="merek" required>
                 </div>
+                <script>
+                    function formatJumlah(input) {
+                        // Hapus semua karakter selain angka
+                        let value = input.value.replace(/\D/g, '');
+                        // Batasi panjang nilai menjadi 18 karakter untuk memenuhi batas maksimal
+                        value = value.substring(0, 18);
+                        // Format ulang dengan titik setiap tiga digit
+                        input.value = value.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+                    }
+
+                    // Menjalankan formatJumlah saat halaman dimuat
+                    document.addEventListener('DOMContentLoaded', function() {
+                        const jumlahInput = document.getElementById('jumlah');
+                        formatJumlah(jumlahInput);
+                    });
+                </script>
                 <div class="flex flex-col gap-2 dark:text-white">
                     <label class="text-sm" for="id_barang">Jumlah</label>
-                    <input type="number" class="px-2 py-1 !text-black text-base font-medium rounded-lg border-[1.7px] border-gray-300 shadow-sm focus:outline-none" name="jumlah" required>
+                    <input type="text" class="px-2 py-1 !text-black text-base font-medium rounded-lg border-[1.7px] border-gray-300 shadow-sm focus:outline-none" name="jumlah" id="jumlah" oninput="formatJumlah(this)" required>
                 </div>
+                <script>
+                    function formatHarga(input) {
+                        // Hapus semua karakter selain angka
+                        let value = input.value.replace(/\D/g, '');
+                        // Batasi panjang nilai menjadi 18 karakter untuk memenuhi batas maksimal
+                        value = value.substring(0, 18);
+                        // Format ulang dengan titik setiap tiga digit
+                        const formatted = value.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+                        // Tambahkan 'Rp. ' di depan nilai yang diformat
+                        input.value = 'Rp. ' + formatted;
+                    }
+
+                    // Menjalankan formatHarga saat halaman dimuat
+                    document.addEventListener('DOMContentLoaded', function() {
+                        const hargaInput = document.getElementById('harga');
+                        formatHarga(hargaInput);
+                    });
+                </script>
                 <div class="flex flex-col gap-2 dark:text-white">
-                    <label class="text-sm" for="id_barang">Harga</label>
-                    <input type="number" class="px-2 py-1 !text-black text-base font-medium rounded-lg border-[1.7px] border-gray-300 shadow-sm focus:outline-none" name="harga" required>
+                    <label class="text-sm" for="harga">Harga (pcs)</label>
+                    <input type="text" class="px-2 py-1 !text-black text-base font-medium rounded-lg border-[1.7px] border-gray-300 shadow-sm focus:outline-none" name="harga" id="harga" oninput="formatHarga(this)" required>
                 </div>
             </div>
             <div class="flex gap-3 items-center dark:text-white">

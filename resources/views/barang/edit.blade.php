@@ -35,12 +35,12 @@
                     <input type="text" class="px-2 py-1 !text-black text-base font-medium rounded-lg border-[1.7px] border-gray-300 shadow-sm focus:outline-none" name="merek" value="{{ old('merek', $data->merek) }}" required>
                 </div>
                 <div class="flex flex-col gap-2 dark:text-white">
-                    <label class="text-sm" for="id_barang">Jumlah</label>
-                    <input type="number" class="px-2 py-1 !text-black text-base font-medium rounded-lg border-[1.7px] border-gray-300 shadow-sm focus:outline-none" name="jumlah" value="{{ old('jumlah', $data->jumlah) }}" required>
+                    <label class="text-sm" for="jumlah">Jumlah</label>
+                    <input type="text" class="px-2 py-1 !text-black text-base font-medium rounded-lg border-[1.7px] border-gray-300 shadow-sm focus:outline-none" name="jumlah" id="jumlah" value="{{ old('jumlah', $data->jumlah) }}" required>
                 </div>
                 <div class="flex flex-col gap-2 dark:text-white">
-                    <label class="text-sm" for="id_barang">Harga</label>
-                    <input type="number" class="px-2 py-1 !text-black text-base font-medium rounded-lg border-[1.7px] border-gray-300 shadow-sm focus:outline-none" name="harga" value="{{ old('harga', $data->harga) }}" required>
+                    <label class="text-sm" for="harga">Harga (pcs)</label>
+                    <input type="text" class="px-2 py-1 !text-black text-base font-medium rounded-lg border-[1.7px] border-gray-300 shadow-sm focus:outline-none" name="harga" id="harga" value="{{ old('harga', $data->harga) }}" required>
                 </div>
             </div>
             <div class="flex gap-3 items-center dark:text-white">

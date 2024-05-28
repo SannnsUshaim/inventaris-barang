@@ -14,6 +14,7 @@ class BarangController extends Controller
      */
     public function index():View {
         $barang = Barang::latest()->paginate(10);
+        
         return view("barang.index", compact("barang"));
     }
 
@@ -41,7 +42,25 @@ class BarangController extends Controller
             'harga' => 'required',
         ]);
 
-        Barang::create($request->all());
+        $jumlahBersih = preg_replace('/[^\d]/', '', $request->jumlah);
+        $jumlahBersih = (int) $jumlahBersih;
+        $hargaBersih = preg_replace('/[^\d]/', '', $request->harga);
+        $hargaBersih = (int) $hargaBersih;
+        
+        $barang = new Barang();
+        $barang->harga = $hargaBersih;
+        $barang->jumlah = $jumlahBersih;
+        $jumlahBersih = $barang->jumlah;
+        $hargaBersih = $barang->harga;
+        
+        Barang::create([
+            'id_barang' => $request->id_barang,
+            'nama_barang' => $request->nama_barang,
+            'jenis_barang' => $request->jenis_barang,
+            'merek' => $request->merek,
+            'jumlah' => $jumlahBersih,
+            'harga' => $hargaBersih,
+        ]);
 
         return redirect()->route('barang.index')->with('success','Data Berhasil Ditambah!');
     }
@@ -68,11 +87,43 @@ class BarangController extends Controller
         ]);
 
         $data = Barang::findOrFail($id);
-
-        $data->update($request->only(['nama_barang', 'jenis_barang', 'merek', 'jumlah', 'harga']));
+        
+        $data->update([
+            'nama_barang' => $request->nama_barang,
+            'jenis_barang' => $request->jenis_barang,
+            'merek' => $request->merek,
+            'jumlah' => $request->jumlah,
+            'harga' => $request->harga,
+        ]);
 
         return redirect()->route('barang.index')->with('success', 'Data berhasil diubah!');
     }
+    // public function update(Request $request, $id): RedirectResponse {
+    //     $this->validate($request, [
+    //         'nama_barang' => 'required|min:2',
+    //         'jenis_barang' => 'required|min:2',
+    //         'merek' => 'required|min:2',
+    //         'jumlah' => 'required|numeric',
+    //         'harga' => 'required|numeric',
+    //     ]);
+
+    //     $data = Barang::findOrFail($id);
+        
+    //     $jumlahBersih = preg_replace('/[^\d]/', '', $request->jumlah);
+    //     $jumlahBersih = (int) $jumlahBersih;
+    //     $hargaBersih = preg_replace('/[^\d]/', '', $request->harga);
+    //     $hargaBersih = (int) $hargaBersih;
+
+    //     $data->update([
+    //         'nama_barang' => $request->nama_barang,
+    //         'jenis_barang' => $request->jenis_barang,
+    //         'merek' => $request->merek,
+    //         'jumlah' => $jumlahBersih,
+    //         'harga' => $hargaBersih,
+    //     ]);
+
+    //     return redirect()->route('barang.index')->with('success', 'Data berhasil diubah!');
+    // }
 
     /**
      * @param mixed $id
@@ -83,6 +134,6 @@ class BarangController extends Controller
 
         $data->delete();
 
-        return redirect()->route('barang.index')->with('success','Data Berhasil Dihapus!');
+        return redirect()->route('barang.index')->with('success-delete','Data Berhasil Dihapus!');
     }
 }
