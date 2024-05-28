@@ -19,8 +19,11 @@
                     <div class="bg-green-300 text-black font-medium text-sm px-4 py-1 rounded-md">
                         {{ session('success') }}
                     </div>
+                @elseif (session()->has('success-delete')) 
+                    <div class="bg-red-300 text-black font-medium text-sm px-4 py-1 rounded-md">
+                        {{ session('success-delete') }}
+                    </div>
                 @endif
-                <div></div>
                 <table class="text-sm font-medium rounded-t-md">
                     <thead class="bg-slate-800 dark:bg-white">
                         <tr class="rounded-t-md">
@@ -42,8 +45,8 @@
                                 <td class="font-regular dark:text-white p-2">{{ $data->nama_barang }}</td>
                                 <td class="font-regular dark:text-white p-2">{{ $data->jenis_barang }}</td>
                                 <td class="font-regular dark:text-white p-2">{{ $data->merek }}</td>
-                                <td class="font-regular dark:text-white p-2">{{ $data->jumlah }}</td>
-                                <td class="font-regular dark:text-white p-2">Rp.{{ $data->harga }}</td>
+                                <td class="font-regular dark:text-white p-2">{{ number_format($data->jumlah ,0 ,',', '.') }} pcs</td>
+                                <td class="font-regular dark:text-white p-2">Rp. {{ number_format($data->total ,0 ,'.', ',') }}</td>
                                 <td>
                                     <form onsubmit="return confirm('Apakah Anda Yakin?');" action="{{ route('pembelian.destroy', $data->id) }}" class="flex items-center gap-2" method="post">
                                         <a href="{{ route('pembelian.edit', $data->id) }}">
@@ -62,7 +65,7 @@
                                 </td>
                             </tr>
                         @empty
-                            <div class="bg-red-200 px-2 py-1 font-medium">
+                            <div class="bg-red-200 px-2 py-1 font-medium rounded-md">
                                 <p>Data belum tersedia...</p>
                             </div>
                         @endforelse
