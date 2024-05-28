@@ -16,21 +16,24 @@ class UserSeeder extends Seeder
     {
 
         $admin = User::updateOrCreate([
+            'id_user' => '123',
             'name' => 'admin',
             'email' => 'admin@mail.com',
-            'password' => Hash::make('000'),
+            'password' => bcrypt('000'),
         ]);
 
         $operator = User::updateOrCreate([
+            'id_user' => '456',
             'name' => 'operator',
             'email' => 'operator@mail.com',
-            'password' => Hash::make('123'),
+            'password' => bcrypt('123'),
         ]);
 
         $staff = User::updateOrCreate([
+            'id_user' => '789',
             'name' => 'staff',
             'email' => 'staff@mail.com',
-            'password' => Hash::make('456'),
+            'password' => bcrypt('456'),
         ]);
 
         $this->call(RolePermissionSeeder::class);
